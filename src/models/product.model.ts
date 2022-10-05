@@ -1,4 +1,4 @@
-export interface product {
+export interface productModel {
   _id: string,
   sale: boolean,
   src: string,
