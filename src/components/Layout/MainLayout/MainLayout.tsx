@@ -12,7 +12,7 @@ type MainLayoutProps = {
 const Component = (props: MainLayoutProps) => (
   <div className={styles.root}>
     <Header />
-      {props.children}
+    {props.children}
     <Footer />
   </div>
 );

@@ -12,9 +12,9 @@ const Component: React.FC = () => {
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export {
   Component as Cart,
-}
+};

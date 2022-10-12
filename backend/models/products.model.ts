@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { productModel } from '../../src/models/product.model';
+import { productModel } from '../../src/types/product.model';
 
 const productSchema = new Schema<productModel>({
   name: { type: String, required: true },
@@ -9,6 +9,7 @@ const productSchema = new Schema<productModel>({
   oldPrice: { type: Number },
   inStock: { type: Number, required: true },
   src: { type: String, required: true },
+  additionalPhotos: { type: [String], required: true },
 });
 
 export const Product = model<productModel>('Product', productSchema);

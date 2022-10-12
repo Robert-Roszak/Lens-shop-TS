@@ -23,9 +23,7 @@
     "rootDir": "./"
   },
   "include": [
-    "backend"
-  ],
-  "exclude": [
+    "backend",
     "src"
   ]
 }

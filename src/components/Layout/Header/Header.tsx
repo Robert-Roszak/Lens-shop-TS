@@ -21,7 +21,7 @@ const Component: React.FC = () => {
             </p>
           </Col>
           <Col className={styles.logo}>
-          <NavLink to='/' className={styles.link}>
+            <NavLink to='/' className={styles.link}>
               <FontAwesomeIcon className={styles.icon} icon={faCamera} />
               <p>Lens shop</p>
             </NavLink>
@@ -39,7 +39,7 @@ const Component: React.FC = () => {
         </Row>
       </Container>
     </header>
-  )
+  );
 };
 
 Component.propTypes = {

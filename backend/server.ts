@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction, Application } from 'express';
+import express, { Request, Response, Application } from 'express';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
@@ -10,9 +10,6 @@ import productsRoutes from './routes/products.routes';
 // import orderRoutes from './routes/order.routes';
 
 const app:Application = express();
-app.get('/', (req: Request, res: Response) => {
-  res.send('Application works!!');
-});
 
 /* MIDDLEWARE*/
 app.use(cors());
@@ -28,14 +25,14 @@ app.use('/api', productsRoutes);/*
 app.use('/api', orderRoutes);*/
 
 /* API ERROR PAGES */
-app.use('/api', (err: Error, req: Request, res: Response, next: NextFunction) => {
-  res.status(500).json({ message: 'Go away' })
-})
+app.use('/api', (err: Error, req: Request, res: Response) => {
+  res.status(500).json({ message: 'Go away' });
+});
 
 /* REACT WEBSITE */
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 /* MONGOOSE */
@@ -51,7 +48,7 @@ app.use(session({
   secret: 'hereIsRandomSecretCodeThatNobodyKnowsAbout!',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: dbUri })
+  store: MongoStore.create({ mongoUrl: dbUri }),
 }));
 
 db.once('open', () => {

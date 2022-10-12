@@ -12,9 +12,9 @@ const Component: React.FC = () => {
         </Row>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
 export {
   Component as Footer,
-}
+};

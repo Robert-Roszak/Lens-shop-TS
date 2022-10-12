@@ -1,16 +1,13 @@
 import React from 'react';
-
 import { Col, Card, Button } from 'react-bootstrap/';
-
-//import { IMAGES_URL } from '../../../config';
+import { productModel } from '../../../types/product.model';
+import { IMAGES_URL } from '../../../config';
 
 import styles from './Products.module.scss';
 
-import { productModel } from '../../../models/product.model';
-
 interface ProductProps {
   product: productModel;
-};
+}
 
 const Component: React.FC<ProductProps> = props => {
   const product = props.product;
@@ -18,8 +15,7 @@ const Component: React.FC<ProductProps> = props => {
     <Col xs={12} sm={6} md={4} className={styles.root}>
       <Card>
         <div className={styles.imageWrapper}>
-            {/* <Card.Img variant="top" src={`${IMAGES_URL}/${product.src}`} /> */}
-            <Card.Img variant="top" src={`${product.src}`} />
+          <Card.Img variant="top" src={`${IMAGES_URL}/${product.src}`} />
           {
             product.sale ?
               <div className={styles.saleText}>SALE!</div>
@@ -48,8 +44,7 @@ const Component: React.FC<ProductProps> = props => {
         </Card.Body>
       </Card>
     </Col>
-  )
-
+  );
 };
 
 export {

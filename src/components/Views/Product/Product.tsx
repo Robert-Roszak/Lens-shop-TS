@@ -59,11 +59,11 @@ const Component = () => {
   // };
 
   //if (product) {
-    return (
-      <Container className={styles.root} fluid={'md'}>
-        <h2>Product</h2>
-        <Row className={styles.allBorders}>
-          {/* <Col>
+  return (
+    <Container className={styles.root} fluid={'md'}>
+      <h2>Product</h2>
+      <Row className={styles.allBorders}>
+        {/* <Col>
             <Carousel fade>
               <Carousel.Item interval={1000}>
                 <Image src={`${IMAGES_URL}/${product.src}`} className={clsx('d-block', 'w-100', styles.image)} alt={product.src}/>
@@ -120,9 +120,9 @@ const Component = () => {
               <Button variant="primary" type="submit" className={styles.btn} onClick={((event) => handleAddToCart(event, product))}>Add to cart</Button>
             </Row>
           </Col> */}
-        </Row>
-      </Container>
-    );
+      </Row>
+    </Container>
+  );
   //}
   // else {
   //   return (
