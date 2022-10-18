@@ -9,7 +9,10 @@ export const productsSlice = createApi({
     fetchProducts: builder.query<productModel[], void>({
       query: () => `/products`,
     }),
+    fetchOneProduct: builder.query<productModel, string | undefined>({
+      query: (id) => `/products/${id}`,
+    }),
   }),
 });
 
-export const { useFetchProductsQuery } = productsSlice;
+export const { useFetchProductsQuery, useFetchOneProductQuery } = productsSlice;
