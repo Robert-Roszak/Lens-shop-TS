@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useAppSelector } from '../../../redux/hooks';
 import { NavLink } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -10,7 +10,7 @@ import { faMobileAlt, faShoppingBasket, faCamera } from '@fortawesome/free-solid
 import styles from './Header.module.scss';
 
 const Component: React.FC = () => {
-
+  const cart = useAppSelector(state => state.cart.items);
   return (
     <header className={styles.root}>
       <Container>
@@ -32,7 +32,7 @@ const Component: React.FC = () => {
                 <div className={styles.cartIcon}>
                   <FontAwesomeIcon className={styles.icon} icon={faShoppingBasket} />
                 </div>
-                <div className={styles.cartCounter}>6</div>
+                <div className={styles.cartCounter}>{cart.length}</div>
               </button>
             </NavLink>
           </Col>
@@ -40,10 +40,6 @@ const Component: React.FC = () => {
       </Container>
     </header>
   );
-};
-
-Component.propTypes = {
-  className: PropTypes.string,
 };
 
 export {

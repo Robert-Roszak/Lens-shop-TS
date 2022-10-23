@@ -1,21 +1,50 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchOneProductQuery } from '../../../redux/productsRedux';
-import { productModel } from '../../../types/product.model';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { addToCart as addToCartRedux } from '../../../redux/cartRedux';
+import { productModel, CartModel } from '../../../types/interfaces';
 import { IMAGES_URL } from '../../../config';
 import clsx from 'clsx';
 import { Container, Row, Spinner, Col, Image, Carousel, Button, Form } from 'react-bootstrap';
 import styles from './Product.module.scss';
 
 const Component: React.FC = () => {
-  const {id} = useParams();
-  const { data } = useFetchOneProductQuery(id);
-  const product = data;
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useAppDispatch();
+  const {id} = useParams();
+  const { data: product, isSuccess } = useFetchOneProductQuery(id);
+  const cart = useAppSelector(state => state.cart.items);
 
   const handleAddToCart = (event: React.MouseEvent, product: productModel) => {
     event.preventDefault();
-    console.log('handleAddToCart ' + product);
+    let canItBeAdded = false;
+
+    if (quantity === null || quantity === 0) {
+      return alert('Please provide quantity');
+    }
+
+    const foundIndex = cart.findIndex(cartItem => cartItem._id === product._id);
+    if (foundIndex >= 0) {
+      if (cart[foundIndex].quantity + quantity <= product.inStock) {
+        canItBeAdded = true;
+      }
+      else return alert('No more products in stock');
+    }
+    else canItBeAdded = true;
+
+    if (canItBeAdded) {
+      const toCart: CartModel = {
+        description: product.description,
+        name: product.name,
+        price: product.price,
+        sale: product.sale,
+        src: product.src,
+        _id: product._id,
+        quantity: quantity,
+      };
+      dispatch(addToCartRedux(toCart));
+    }
   };
 
   const handleQuantity = (value: string, inStock: number) => {
@@ -25,7 +54,7 @@ const Component: React.FC = () => {
     else if (parsedValue < 0) alert('Value cannot be lower than 0');
   };
 
-  if (product) {
+  if (isSuccess) {
     return (
       <Container className={styles.root} fluid={'md'}>
         <h2>Product</h2>
@@ -74,17 +103,21 @@ const Component: React.FC = () => {
               </p>
             </Row>
             <Row className={styles.buy} as={Form}>
-              <Form.Control
-                type='number'
-                id='quantity'
-                name='quantity'
-                className={styles.quantityInput}
-                value={quantity}
-                min='0'
-                max={product.inStock}
-                onChange={e => handleQuantity(e.target.value, product.inStock)}
-              />
-              <Button variant='primary' type='submit' className={styles.btn} onClick={((event) => handleAddToCart(event, product))}>Add to cart</Button>
+              <Col xs lg='3'>
+                <Form.Control
+                  type='number'
+                  id='quantity'
+                  name='quantity'
+                  className={styles.quantityInput}
+                  value={quantity}
+                  min='0'
+                  max={product.inStock}
+                  onChange={e => handleQuantity(e.target.value, product.inStock)}
+                />
+              </Col>
+              <Col md='9'>
+                <Button variant='primary' type='submit' className={styles.submitBtn} onClick={(event) => handleAddToCart(event, product)}>Add to cart</Button>
+              </Col>              
             </Row>
           </Col>
         </Row>

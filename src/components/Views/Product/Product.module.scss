@@ -19,16 +19,11 @@
   }
 
   .buy {
-    flex-direction: row;
-
-    .btn {
-      width: 81%;
-      margin: 5px 10px;
+    .submitBtn {
+      width: 100%;
     }
 
     .quantityInput {
-      width: 15%;
-      margin: 5px 0;
       text-align: center;
     }
   }

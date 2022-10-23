@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Card, Button } from 'react-bootstrap/';
-import { productModel } from '../../../types/product.model';
+import { productModel } from '../../../types/interfaces';
 import { IMAGES_URL } from '../../../config';
 
 import styles from './Products.module.scss';

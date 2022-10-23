@@ -5,16 +5,16 @@ import { Products } from '../Products/Products';
 import styles from './Homepage.module.scss';
 
 const Component: React.FC = () => {
-  const { data = [] } = useFetchProductsQuery();
+  const { data: products = [], isSuccess } = useFetchProductsQuery();
 
-  if (data.length > 0) {
+  if (isSuccess) {
     return (
       <div className={styles.root}>
         <Container>
           <Row className="g-4">
             <h2>Our products</h2>
             {
-              data.map(product => (<Products product={product} key={product._id}/>))
+              products.map(product => (<Products product={product} key={product._id}/>))
             }
           </Row>
         </Container>

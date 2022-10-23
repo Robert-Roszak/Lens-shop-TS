@@ -9,3 +9,13 @@ export interface productModel {
   inStock: number,
   additionalPhotos: string[]
 }
+
+export interface CartModel {
+  _id: string,
+  sale: boolean,
+  src: string,
+  price: number,
+  name: string,
+  description: string,
+  quantity: number
+}
