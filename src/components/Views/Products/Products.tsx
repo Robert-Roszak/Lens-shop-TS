@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Card, Button } from 'react-bootstrap/';
+import { Col, Card, Button } from 'react-bootstrap';
 import { productModel } from '../../../types/interfaces';
 import { IMAGES_URL } from '../../../config';
 
@@ -9,8 +9,7 @@ interface ProductProps {
   product: productModel;
 }
 
-const Component: React.FC<ProductProps> = props => {
-  const product = props.product;
+const Component: React.FC<ProductProps> = ({product}) => {
   return (
     <Col xs={12} sm={6} md={4} className={styles.root}>
       <Card>

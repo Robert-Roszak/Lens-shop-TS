@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import MongoStore from 'connect-mongo';
 
 import productsRoutes from './routes/products.routes';
-// import orderRoutes from './routes/order.routes';
+import orderRoutes from './routes/orders.routes';
 
 const app:Application = express();
 
@@ -21,8 +21,8 @@ app.use(helmet({
 }));
 
 /* API ENDPOINTS */
-app.use('/api', productsRoutes);/*
-app.use('/api', orderRoutes);*/
+app.use('/api', productsRoutes);
+app.use('/api', orderRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (err: Error, req: Request, res: Response) => {

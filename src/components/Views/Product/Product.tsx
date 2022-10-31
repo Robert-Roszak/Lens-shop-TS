@@ -38,7 +38,6 @@ const Component: React.FC = () => {
         description: product.description,
         name: product.name,
         price: product.price,
-        sale: product.sale,
         src: product.src,
         _id: product._id,
         quantity: quantity,

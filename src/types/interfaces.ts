@@ -1,21 +1,30 @@
-export interface productModel {
+interface Product {
   _id: string,
-  sale: boolean,
   src: string,
-  oldPrice: number,
   price: number,
   name: string,
   description: string,
-  inStock: number,
-  additionalPhotos: string[]
 }
 
-export interface CartModel {
-  _id: string,
+export interface productModel extends Product {
   sale: boolean,
-  src: string,
-  price: number,
-  name: string,
-  description: string,
-  quantity: number
+  oldPrice: number,
+  inStock: number,
+  additionalPhotos: string[],
+}
+
+export interface CartModel extends Product {
+  quantity: number,
+  comment?: string,
+}
+
+export interface OrderModel {
+  contact: string;
+  address: string;
+  payment: string;
+  shipping: string;
+  message: string;
+  email: string;
+  items: CartModel[];
+  toPay: number;
 }
