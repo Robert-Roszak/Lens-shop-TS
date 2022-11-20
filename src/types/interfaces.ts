@@ -19,6 +19,7 @@ export interface CartModel extends Product {
 }
 
 export interface OrderModel {
+  _id: string,
   contact: string;
   address: string;
   payment: string;

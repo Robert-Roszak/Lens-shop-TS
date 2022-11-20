@@ -6,7 +6,7 @@ export const orderSlice = createApi({
   reducerPath: 'orders',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
-    sendOrder: builder.mutation<OrderModel, Partial<OrderModel>>({
+    sendOrder: builder.mutation<{orderId: string}, Partial<OrderModel>>({
       query: (payload) => ({
         url: '/orders',
         method: 'POST',
@@ -16,7 +16,10 @@ export const orderSlice = createApi({
         },
       }),
     }),
+    fetchOrder: builder.query<OrderModel, string | undefined>({
+      query: (id) => `/orders/${id}`,
+    }),
   }),
 });
 
-export const { useSendOrderMutation } = orderSlice;
+export const { useSendOrderMutation, useFetchOrderQuery } = orderSlice;

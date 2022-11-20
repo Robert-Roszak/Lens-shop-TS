@@ -12,3 +12,14 @@ export const addOrder: RequestHandler = async (req, res) => {
     res.status(500).json({ message: err });
   }
 };
+
+export const getOrder: RequestHandler = async (req, res) => {
+  try {
+    const result = await Order.findById(req.params.id);
+    if(!result) res.status(404).json({ order: 'Not found' });
+    else res.json(result);
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
+};
