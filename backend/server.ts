@@ -42,6 +42,8 @@ if (NODE_ENV === 'production') dbUri = `mongodb+srv://${process.env.DBUSER}:${pr
 else if (NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/lensShoptest';
 else dbUri = 'mongodb://localhost:27017/lensShop';
 
+mongoose.set('strictQuery', true);
+
 mongoose.connect(dbUri);
 const db = mongoose.connection;
 app.use(session({
