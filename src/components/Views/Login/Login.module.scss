@@ -1,0 +1,13 @@
+@import '../../../styles/global.scss';
+
+.root {
+  .loginForm {
+    background-color: #363636;
+    color: white;
+    width: auto;
+    margin-top: 25px;
+  }
+  .submit {
+    width: 100%;
+  }
+}
