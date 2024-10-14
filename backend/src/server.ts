@@ -50,7 +50,7 @@ if (NODE_ENV === 'production') dbUri = process.env.DBURLFINAL as string;
 else if (NODE_ENV === 'test') dbUri = process.env.DBURLLOCALTEST as string;
 else dbUri = process.env.DBURLLOCAL as string;
 
-if (!process.env.NODE_ENV && dbUri == 'undefined') {
+if (!process.env.NODE_ENV || dbUri == 'undefined') {
   throw new Error('Add mongo URI');
 }
 
