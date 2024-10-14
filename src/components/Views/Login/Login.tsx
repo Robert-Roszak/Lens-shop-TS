@@ -11,25 +11,6 @@ const Component: React.FC = () => {
     const password = (document.getElementById('formPassword') as HTMLInputElement).value;
     console.log('email: ' + email);
     console.log('password: ' + password);
-    // const address = (document.getElementById('formAddress') as HTMLInputElement).value;
-    // const payment = (document.getElementById('formPayment') as HTMLInputElement).value;
-    // const shipping = (document.getElementById('formShipping') as HTMLInputElement).value;
-    // const message = (document.getElementById('formMessage') as HTMLInputElement).value;
-
-    // if (contact && address && payment && shipping && validateEmail(email)) {
-    //   orderDetails.contact = contact;
-    //   orderDetails.address = address;
-    //   orderDetails.payment = payment;
-    //   orderDetails.shipping = shipping;
-    //   orderDetails.message = message;
-    //   orderDetails.email = email;
-    //   orderDetails.items = cart;
-    //   orderDetails.toPay = totalPrice;
-    //   const createdOrder = await addNewOrder(orderDetails).unwrap();
-
-    //   callback(createdOrder.orderId);
-    // }
-    // else alert('Please provided all details');
   };
 
   return (

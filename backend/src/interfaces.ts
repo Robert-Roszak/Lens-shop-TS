@@ -28,6 +28,7 @@ export interface OrderModel {
   email: string;
   items: CartModel[];
   toPay: number;
+  deliveryFee: number;
 }
 
 export interface UserData {

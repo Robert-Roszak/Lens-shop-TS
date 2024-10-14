@@ -96,7 +96,6 @@ const removeProductFromCart = (state: CartState, action: PayloadAction<{ id: str
   }
 };
 
-
 const removeAllProductsFromCart = (state: CartState) => {
   localStorage.setItem('cart', JSON.stringify([]));
   state.items = [];

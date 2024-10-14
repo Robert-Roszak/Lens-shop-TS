@@ -1,4 +1,4 @@
-import express, { Request, Response, Application, NextFunction } from 'express';
+import express, { Request, Response, Application } from 'express';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
@@ -9,6 +9,7 @@ import 'dotenv/config';
 
 import productsRoutes from './routes/products.routes';
 import orderRoutes from './routes/orders.routes';
+import emailRoutes from './routes/email.routes';
 
 const app:Application = express();
 
@@ -24,14 +25,14 @@ app.use(helmet({
 
 /* API ENDPOINTS */
 app.get('/', (req, res) => {
-  res.json('Hello!');
+  res.json('Hello! You are not invited. Shu shu!');
 });
 app.use('/api', productsRoutes);
 app.use('/api', orderRoutes);
+app.use('/api', emailRoutes);
 
 /* API ERROR PAGES */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use('/api', (err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use('/api', (err: Error, req: Request, res: Response) => {
   res.status(500).send('Go away!');
 });
 
@@ -43,20 +44,17 @@ app.use('*', (req, res) => {
 
 /* MONGOOSE */
 const NODE_ENV = process.env.NODE_ENV;
-console.log('NODE_ENV : ' + NODE_ENV);
 
-// let dbUri = '';
-// if (NODE_ENV === 'production') dbUri = process.env.DBURLFINAL as string;
-// else if (NODE_ENV === 'test') dbUri = process.env.DBURLLOCALTEST as string;
-// else dbUri = process.env.DBURLLOCAL as string;
+let dbUri;
+if (NODE_ENV === 'production') dbUri = process.env.DBURLFINAL as string;
+else if (NODE_ENV === 'test') dbUri = process.env.DBURLLOCALTEST as string;
+else dbUri = process.env.DBURLLOCAL as string;
 
-if (!process.env.MONGODB_URI) {
+if (!process.env.NODE_ENV && dbUri == 'undefined') {
   throw new Error('Add mongo URI');
 }
 
-const dbUri = process.env.MONGODB_URI as string;
 mongoose.set('strictQuery', true);
-console.log('dbUri: ' + dbUri);
 
 mongoose.connect(dbUri).catch(error => {throw new Error(error);});
 

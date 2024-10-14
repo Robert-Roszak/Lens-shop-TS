@@ -14,7 +14,7 @@ const Component: React.FC<NewOrderConfirmationProps> = ({orderId}) => {
           <Col xs lg='5' className={styles.confirmation}>
             <p>Thank you for trusting us with your order.</p>
             <p>We have given it number {orderId}</p>
-            <p>Create account here to view its status</p>
+            <p>Create account here to view its status (not yet implemented)</p>
           </Col>
         </Row>
       </section>

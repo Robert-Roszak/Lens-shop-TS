@@ -34,9 +34,7 @@ const Component: React.FC = () => {
     setLabel('Delivery and payment');
   };
 
-  const handleCallback = (orderId: string) => {
-    console.log('calledback');
-    console.log(orderId);
+  const handleReceivedOrderId = (orderId: string) => {
     setOrderId(orderId);
     setCheckout(false);
     setConfirmation(true);
@@ -112,7 +110,7 @@ const Component: React.FC = () => {
             : 
             ''
         }
-        { showCheckout ? <Checkout cart={cart} totalPrice={totalPrice} callback={handleCallback}/> : '' }
+        { showCheckout ? <Checkout deliveryFee={deliveryFee} cart={cart} totalPrice={totalPrice} createdOrderIdCallback={handleReceivedOrderId}/> : '' }
       </Container>
     );
   }

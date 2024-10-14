@@ -10,6 +10,7 @@ const orderSchema = new Schema<OrderModel>({
   email: { type: String, required: true },
   items: { type: [Object], required: true },
   toPay: { type: Number, required: true },
+  deliveryFee: { type: Number, required: true },
 });
 
 export const Order = model<OrderModel>('Order', orderSchema);

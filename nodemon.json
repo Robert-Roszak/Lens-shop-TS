@@ -1,5 +1,8 @@
 {
-  "watch": "backend/*.ts",
+  "watch": [
+    "backend/*.ts",
+    "src/*.ts"
+  ],
   "execMap": {
     "ts": "ts-node"
   }

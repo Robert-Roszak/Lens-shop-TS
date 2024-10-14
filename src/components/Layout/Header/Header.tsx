@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMobileAlt, faShoppingBasket, faCamera, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faMobileAlt, faShoppingBasket, faCamera } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Header.module.scss';
 

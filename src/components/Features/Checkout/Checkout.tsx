@@ -1,17 +1,20 @@
 import React from 'react';
-import { CartModel, OrderModel } from '../../../types/interfaces';
-import { useSendOrderMutation } from '../../../redux/orderRedux';
 import { Button, Form } from 'react-bootstrap';
+
+import { CartModel, OrderModel, emailOptions } from '../../../types/interfaces';
+import { useSendOrderMutation } from '../../../redux/orderRedux';
+import { sendEmailNotification } from '../../../utils/utils';
 
 import styles from './Checkout.module.scss';
 
 interface CheckoutProps {
+  deliveryFee: number,
   cart: CartModel[],
   totalPrice: number,
-  callback: (id: string) => void,
+  createdOrderIdCallback: (id: string) => void,
 }
 
-const Component: React.FC<CheckoutProps> = ({cart, totalPrice, callback}) => {
+const Component: React.FC<CheckoutProps> = ({deliveryFee, cart, totalPrice, createdOrderIdCallback}) => {
   const [addNewOrder ] = useSendOrderMutation();
 
   const validateEmail = (email: string) => {
@@ -22,7 +25,7 @@ const Component: React.FC<CheckoutProps> = ({cart, totalPrice, callback}) => {
 
   const createOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const orderDetails = {} as OrderModel;
+    
     const email = (document.getElementById('formEmail') as HTMLInputElement).value;
     const contact = (document.getElementById('formContact') as HTMLInputElement).value;
     const address = (document.getElementById('formAddress') as HTMLInputElement).value;
@@ -31,6 +34,7 @@ const Component: React.FC<CheckoutProps> = ({cart, totalPrice, callback}) => {
     const message = (document.getElementById('formMessage') as HTMLInputElement).value;
 
     if (contact && address && payment && shipping && validateEmail(email)) {
+      const orderDetails = {} as OrderModel;
       orderDetails.contact = contact;
       orderDetails.address = address;
       orderDetails.payment = payment;
@@ -39,9 +43,17 @@ const Component: React.FC<CheckoutProps> = ({cart, totalPrice, callback}) => {
       orderDetails.email = email;
       orderDetails.items = cart;
       orderDetails.toPay = totalPrice;
-      const createdOrder = await addNewOrder(orderDetails).unwrap();
+      orderDetails.deliveryFee = deliveryFee;
 
-      callback(createdOrder.orderId);
+      const createdOrder = await addNewOrder(orderDetails).unwrap();
+      const createdOrderId = createdOrder.orderId;
+
+      const emailDetails = orderDetails as emailOptions;
+      emailDetails._id = createdOrderId;
+      emailDetails.emailTemplate = 'orderConfirmation';
+
+      createdOrderIdCallback(createdOrderId);
+      sendEmailNotification(emailDetails);
     }
     else alert('Please provided all details');
   };

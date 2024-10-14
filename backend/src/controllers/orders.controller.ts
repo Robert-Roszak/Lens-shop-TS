@@ -3,8 +3,8 @@ import { RequestHandler } from 'express';
 
 export const addOrder: RequestHandler = async (req, res) => {
   try {
-    const { contact, address, payment, shipping, message, email, items, toPay} = req.body;
-    const newOrder = new Order({ contact, address, payment, shipping, message, email, items, toPay});
+    const { contact, address, payment, shipping, message, email, items, toPay, deliveryFee} = req.body;
+    const newOrder = new Order({ contact, address, payment, shipping, message, email, items, toPay, deliveryFee});
     await newOrder.save();
     res.json({ orderId: newOrder._id });
   }

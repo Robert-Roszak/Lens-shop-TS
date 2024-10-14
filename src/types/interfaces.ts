@@ -24,14 +24,19 @@ export interface OrderModel {
   address: string;
   payment: string;
   shipping: string;
-  message: string;
+  message?: string;
   email: string;
   items: CartModel[];
   toPay: number;
+  deliveryFee: number;
 }
 
 export interface UserData {
   _id: string,
   email: string;
   password: string;
+}
+
+export interface emailOptions extends OrderModel {
+  emailTemplate: string,
 }
