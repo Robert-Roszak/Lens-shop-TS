@@ -5,4 +5,4 @@ The app features products featched from MongoDB (dynamic "Sale" icon upon changi
 In the backlog there are:
 - posibility to log in/create account and review user's purchases,
 - admin panel to manage states of orders,
-- email notification about each step of the order
+- ~~email notification about each step of the order~~
