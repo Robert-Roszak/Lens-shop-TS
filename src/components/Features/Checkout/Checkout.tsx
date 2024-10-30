@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 import { CartModel, OrderModel, emailOptions } from '../../../types/interfaces';
+import { OrderStatusesEnum } from '../../../types/enums';
 import { useSendOrderMutation } from '../../../redux/orderRedux';
-import { sendEmailNotification } from '../../../utils/utils';
+import { sendEmailNotification, validateEmail } from '../../../utils/utils';
 
 import styles from './Checkout.module.scss';
 
@@ -16,12 +17,6 @@ interface CheckoutProps {
 
 const Component: React.FC<CheckoutProps> = ({deliveryFee, cart, totalPrice, createdOrderIdCallback}) => {
   const [addNewOrder ] = useSendOrderMutation();
-
-  const validateEmail = (email: string) => {
-    const validRegex = /\S+@\S+\.\S+/;
-    if (email.match(validRegex)) return true;
-    else return false;
-  };
 
   const createOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,6 +39,7 @@ const Component: React.FC<CheckoutProps> = ({deliveryFee, cart, totalPrice, crea
       orderDetails.items = cart;
       orderDetails.toPay = totalPrice;
       orderDetails.deliveryFee = deliveryFee;
+      orderDetails.orderStatus = OrderStatusesEnum.New;
 
       const createdOrder = await addNewOrder(orderDetails).unwrap();
       const createdOrderId = createdOrder.orderId;

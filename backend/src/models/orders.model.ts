@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { OrderModel } from '../interfaces';
+import { OrderModel, OrderStatuses } from '../interfaces';
 
 const orderSchema = new Schema<OrderModel>({
   contact: { type: String, required: true },
@@ -11,6 +11,11 @@ const orderSchema = new Schema<OrderModel>({
   items: { type: [Object], required: true },
   toPay: { type: Number, required: true },
   deliveryFee: { type: Number, required: true },
+  orderStatus: {
+    type: String,
+    enum: Object.values(OrderStatuses),
+    default: OrderStatuses.New,
+  },
 });
 
 export const Order = model<OrderModel>('Order', orderSchema);

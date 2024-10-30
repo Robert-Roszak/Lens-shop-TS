@@ -29,10 +29,19 @@ export interface OrderModel {
   items: CartModel[];
   toPay: number;
   deliveryFee: number;
+  orderStatus: OrderStatuses;
 }
 
-export interface UserData {
+export interface UserModel {
+  email: string,
+  password: string,
   _id: string,
-  email: string;
-  password: string;
+  isAdmin: boolean,
+}
+
+export enum OrderStatuses {
+  New = 'New',
+  InProcess = 'In process',
+  Sent = 'Sent',
+  Delivered = 'Delivered',
 }

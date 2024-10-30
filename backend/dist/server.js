@@ -14,6 +14,7 @@ require("dotenv/config");
 const products_routes_1 = __importDefault(require("./routes/products.routes"));
 const orders_routes_1 = __importDefault(require("./routes/orders.routes"));
 const email_routes_1 = __importDefault(require("./routes/email.routes"));
+const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const app = (0, express_1.default)();
 /* MIDDLEWARE*/
 app.use((0, cors_1.default)());
@@ -30,9 +31,10 @@ app.get('/', (req, res) => {
 app.use('/api', products_routes_1.default);
 app.use('/api', orders_routes_1.default);
 app.use('/api', email_routes_1.default);
+app.use('/api', user_routes_1.default);
 /* API ERROR PAGES */
 app.use('/api', (err, req, res) => {
-    res.status(500).send('Go away!');
+    res.sendStatus(500).send('Go away!');
 });
 /* REACT WEBSITE */
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../public')));
@@ -48,7 +50,6 @@ else if (NODE_ENV === 'test')
     dbUri = process.env.DBURLLOCALTEST;
 else
     dbUri = process.env.DBURLLOCAL;
-console.log('dbUri: ' + dbUri);
 if (!process.env.NODE_ENV || dbUri == 'undefined') {
     throw new Error('Add mongo URI');
 }

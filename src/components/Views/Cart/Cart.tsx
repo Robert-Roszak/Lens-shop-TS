@@ -110,7 +110,7 @@ const Component: React.FC = () => {
             : 
             ''
         }
-        { showCheckout ? <Checkout deliveryFee={deliveryFee} cart={cart} totalPrice={totalPrice} createdOrderIdCallback={handleReceivedOrderId}/> : '' }
+        { showCheckout ?? <Checkout deliveryFee={deliveryFee} cart={cart} totalPrice={totalPrice} createdOrderIdCallback={handleReceivedOrderId}/>}
       </Container>
     );
   }

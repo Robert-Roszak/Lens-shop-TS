@@ -6,8 +6,19 @@
     color: white;
     width: auto;
     margin-top: 25px;
+    padding: 20px;
+
+    .submit {
+      width: 100%;
+    }
+
+    .emailText {
+      color: white;
+    }
+
+    .registerText {
+      cursor: pointer;
+    }
   }
-  .submit {
-    width: 100%;
-  }
+
 }

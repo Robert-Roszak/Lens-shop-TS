@@ -10,6 +10,7 @@ import 'dotenv/config';
 import productsRoutes from './routes/products.routes';
 import orderRoutes from './routes/orders.routes';
 import emailRoutes from './routes/email.routes';
+import userRoutes from './routes/user.routes';
 
 const app:Application = express();
 
@@ -30,10 +31,11 @@ app.get('/', (req, res) => {
 app.use('/api', productsRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', emailRoutes);
+app.use('/api', userRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (err: Error, req: Request, res: Response) => {
-  res.status(500).send('Go away!');
+  res.sendStatus(500).send('Go away!');
 });
 
 /* REACT WEBSITE */

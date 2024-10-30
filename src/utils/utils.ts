@@ -33,3 +33,9 @@ const determineEmailContent = function (emailDetails: emailOptions) {
       return orderConfirmationEmail(emailDetails);
   }
 };
+
+export const validateEmail = (email: string) => {
+  const validRegex = /\S+@\S+\.\S+/;
+  if (email.match(validRegex)) return true;
+  else return false;
+};

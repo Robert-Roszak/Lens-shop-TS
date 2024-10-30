@@ -1,19 +1,5 @@
 import { createSlice, /*current,*/ PayloadAction } from '@reduxjs/toolkit';
-import { CartModel } from '../types/interfaces';
-
-interface CartState {
-  items: CartModel[];
-}
-
-interface CommentModel {
-  comment: string,
-  id: string,
-}
-
-interface QuantityModel {
-  quantity: number,
-  id: string,
-}
+import { CartModel, CartState, CommentModel, QuantityModel } from '../types/interfaces';
 
 const initialState: CartState = {
   items: JSON.parse(localStorage.getItem('cart') || '[]'),

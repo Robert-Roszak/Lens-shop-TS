@@ -4,5 +4,7 @@ const express_1 = require("express");
 const orders_controller_1 = require("../controllers/orders.controller");
 const router = (0, express_1.Router)();
 router.post('/orders', orders_controller_1.addOrder);
-router.get('/orders/:id', orders_controller_1.getOrder);
+router.put('/orders/order/:id/status', orders_controller_1.updateOrderStatus);
+router.get('/orders/order/:id', orders_controller_1.getOrderById);
+router.get('/orders', orders_controller_1.getOrders);
 exports.default = router;
